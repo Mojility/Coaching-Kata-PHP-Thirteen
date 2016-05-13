@@ -58,7 +58,6 @@ class Thirteen {
     private function setRange($startDate, $endDate) {
         $this->start = new DateTime($startDate);
         $this->end   = new DateTime($endDate);
-        echo $this->end->format('Y-m-d') . "\n";
         if ($this->start > $this->end) throw new InvalidArgumentException();
     }
 
