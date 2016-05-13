@@ -56,8 +56,54 @@ class ThirteenTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue($tuesdays > $thursdays);
     }
 
+    public function test_Friday_The_13ths_In_116y() {
+        $fridays = $this->count13thsOver116years(Thirteen::FRIDAY);
+        $saturdays = $this->count13thsOver116years(Thirteen::SATURDAY);
+        $sundays = $this->count13thsOver116years(Thirteen::SUNDAY);
+        $mondays = $this->count13thsOver116years(Thirteen::MONDAY);
+        $tuesdays = $this->count13thsOver116years(Thirteen::TUESDAY);
+        $wednesdays = $this->count13thsOver116years(Thirteen::WEDNESDAY);
+        $thursdays = $this->count13thsOver116years(Thirteen::THURSDAY);
+
+        $this->assertTrue($fridays > $saturdays);
+        $this->assertTrue($fridays > $sundays);
+        $this->assertTrue($fridays > $mondays);
+        $this->assertTrue($fridays > $tuesdays);
+        $this->assertTrue($fridays > $wednesdays);
+        $this->assertTrue($fridays > $thursdays);
+    }
+
+    public function test_Friday_The_13ths_Over_Many() {
+        $fridays = $this->count13thsOverManyYears(Thirteen::FRIDAY);
+        $saturdays = $this->count13thsOverManyYears(Thirteen::SATURDAY);
+        $sundays = $this->count13thsOverManyYears(Thirteen::SUNDAY);
+        $mondays = $this->count13thsOverManyYears(Thirteen::MONDAY);
+        $tuesdays = $this->count13thsOverManyYears(Thirteen::TUESDAY);
+        $wednesdays = $this->count13thsOverManyYears(Thirteen::WEDNESDAY);
+        $thursdays = $this->count13thsOverManyYears(Thirteen::THURSDAY);
+
+        $this->assertTrue($fridays > $saturdays);
+        $this->assertTrue($fridays > $sundays);
+        $this->assertTrue($fridays > $mondays);
+        $this->assertTrue($fridays > $tuesdays);
+        $this->assertTrue($fridays > $wednesdays);
+        $this->assertTrue($fridays > $thursdays);
+    }
+
+    private function count13thsBetween($day, $start, $end) {
+        return Thirteen::countDayOfMonthAndDayOfWeekMatchesInRange($day, 13, $start, $end);
+    }
+
     private function count13thsOver40years($day) {
-        return Thirteen::countDayOfMonthAndDayOfWeekMatchesInRange($day, 13, '1973-01-01', '2013-12-31');
+        return $this->count13thsBetween($day, '1973-01-01', '2013-12-31');
+    }
+
+    private function count13thsOver116years($day) {
+        return $this->count13thsBetween($day, '1900-01-01', '2015-12-31');
+    }
+
+    private function count13thsOverManyYears($day) {
+        return $this->count13thsBetween($day, '1900-01-01', '2999-12-31');
     }
 
 }
